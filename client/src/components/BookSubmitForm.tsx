@@ -79,6 +79,7 @@ const BookSubmitForm:React.FC = () => {
                         onChange={(e) => setPages(parseInt(e.target.value))} />
                     <Button
                         variant="contained"
+                        id="submit"
                         onClick={() => submitBook(name, author, pages)}>
                             Submit
                     </Button>
