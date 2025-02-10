@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<BookSubmitForm />}/>
           <Route path="/book/:id" element={<BookInformation/>}/>
+          <Route path="*" element={<h1>404: This is not the webpage you are looking for</h1>}/>
         </Routes>
       </BrowserRouter>
     </>
