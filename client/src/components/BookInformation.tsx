@@ -11,6 +11,7 @@ const BookInformation:React.FC = () => {
     const { id } = useParams<{id:any}>();
     const [bookData, setBookData] = React.useState<IBook>({name: '', author: '', pages: 0});
     const [loading, setLoading] = React.useState<boolean>(true);
+    const [error, setError] = React.useState<boolean>(true);
     console.log(id);
 
     useEffect(() => {
@@ -23,10 +24,12 @@ const BookInformation:React.FC = () => {
                 }
 
                 const data = await response.json();
+                setError(false);
                 setBookData(data);
                 console.log(data);
                 setLoading(false);
             } catch (error) {
+                setError(true);
                 if (error instanceof Error) {
                     console.log(`Error when fetching book ${error.message}`);
                 }
@@ -37,7 +40,8 @@ const BookInformation:React.FC = () => {
 
     return (
         <div>
-            {loading ? <h1>404: This is not the webpage you are looking for</h1> : <><p>{bookData.name}</p> <p> {bookData.author}</p> <p> {bookData.pages}</p></>}
+            {loading ? <p1></p1> : <><p>{bookData.name}</p> <p> {bookData.author}</p> <p> {bookData.pages}</p></>}
+            {error && <h1>404: This is not the webpage you are looking for</h1>}
         </div>
     )
 }
