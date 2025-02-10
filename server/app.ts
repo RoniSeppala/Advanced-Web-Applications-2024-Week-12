@@ -1,6 +1,7 @@
 import express, {Express} from 'express';
 import mongoose, {Connection} from 'mongoose';
 import morgan from 'morgan';
+import apiRouter from './src/routes/api';
 
 const app: Express = express();
 const port: number = 3000;
@@ -15,6 +16,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.json());
 app.use(morgan('dev'));
+app.use('/api', apiRouter);
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
