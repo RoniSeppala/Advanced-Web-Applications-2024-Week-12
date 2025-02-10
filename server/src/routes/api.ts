@@ -25,7 +25,7 @@ router.post("/book", (req: Request, res: Response) => {
         });
 
 
-        
+
     } catch (err: any) {
         console.error(err);
         res.status(500).json({error: "Internal server error"});
@@ -34,6 +34,30 @@ router.post("/book", (req: Request, res: Response) => {
 
 });
 
+router.get("/book/:id", (req: Request, res: Response) => {
+    const bookName: string = req.params.id;
 
+    if (!bookName) {
+        res.status(400).send("Invalid input");
+        return;
+    }
+
+    const parsedBookName: string = decodeURIComponent(bookName)
+
+    Book.findOne({"name": parsedBookName}).then((data: IBook | null) => {
+        if (data) {
+            res.status(200).json(data);
+            return
+        } else {
+            res.status(404).json({error: "Book not found"});
+            return
+        }
+    }).catch((err: any) => {
+        console.error(err);
+        res.status(500).json({error: "Internal server error"});
+        return;
+    });
+
+});
 
 export default router;
