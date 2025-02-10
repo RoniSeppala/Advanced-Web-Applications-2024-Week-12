@@ -37,9 +37,7 @@ const BookInformation:React.FC = () => {
 
     return (
         <div>
-            <p>{!loading ? bookData.name : 'Loading...'}</p>
-            <p>{!loading ? bookData.author : 'Loading...'}</p>
-            <p>{!loading ? bookData.pages : 'Loading...'}</p>
+            {loading ? <h1>404: This is not the webpage you are looking for</h1> : <><p>{bookData.name}</p> <p> {bookData.author}</p> <p> {bookData.pages}</p></>}
         </div>
     )
 }
